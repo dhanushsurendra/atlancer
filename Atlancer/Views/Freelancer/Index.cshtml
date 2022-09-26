@@ -1,0 +1,283 @@
+﻿@model FreelancerViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile | Atlancer</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;1,100&display=swap" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm">
+            <div class="container-fluid" style="max-width: 1320px">
+                <div class="w-100 d-flex justify-content-between align-items-center">
+                    <img class="img-fluid p-3" width="200px" src="~/images/logo-01-01.png" />
+
+                    <div class="d-flex align-items-center">
+
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home"
+                                   asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home"
+                                   asp-action="Privacy">Privacy</a>
+                            </li>
+                        </ul>
+
+                        <!--Search input field-->
+
+                        <div class="Icon-inside">
+                            <input type="text" placeholder="Search" class="search-input">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </div>
+
+                        <div class="d-flex align-items-center">
+                            @if (ViewBag.UserType == "Freelancer")
+                            {
+                                <a style="display: flex; text-decoration: none" asp-controller="Freelancer"
+                               asp-action="Index" asp-route-id=@ViewBag.UserId>
+                                    <img src="~/images/avatar.png" alt="Avatar" class="avatar" />
+                                    <p style="color: #000; font-weight: 500" class="align-self-center mb-0 pr-1">
+                                        @ViewBag.UserName
+                                    </p>
+                                </a>
+                            }
+                            else
+                            {
+                                <a style="display: flex; text-decoration: none" asp-controller="Client" asp-action="Index"
+                               asp-route-id=@ViewBag.UserId>
+                                    <img src="~/images/avatar.png" alt="Avatar" class="avatar" />
+                                    <p style="color: #000; font-weight: 500" class="align-self-center mb-0 pr-1">
+                                        @ViewBag.UserName
+                                    </p>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!--
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                -->
+            </div>
+        </nav>
+        <hr style="width: 1320px; margin: auto" class="text-center" />
+
+        <div class="mt-3" style="display: block; margin: auto">
+            <ul class="d-flex footer_items justify-content-center">
+                <li><a asp-controller="" asp-action="" class="p-2 services_link">Development & IT</a></li>
+                <li><a href="" class="p-2 services_link">Design & Creative</a></li>
+                <li><a href="" class="p-2 services_link">Sales & Marketing</a></li>
+                <li><a href="" class="p-2 services_link">Writing & Translation</a></li>
+                <li><a href="" class="p-2 services_link">Engineering & Architecture</a></li>
+
+            </ul>
+        </div>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            <section class="section">
+                <div class="d-flex row m-0" style="width: 100%">
+                    <div class="col-4">
+                        <div class="profile_details d-flex align-items-center flex-column"
+                             style="padding: 20px 30px 5px 30px">
+
+                            <a asp-controller="Freelancer" asp-action="Edit" asp-route-id=@ViewBag.UserId
+                               class="profile_online">
+                                <i class="fa fa-pencil"
+                                   style="display: inline-block; position: initial; font-size: 20px !important; color: #0d6efd !important;"></i>
+                            </a>
+                            <div style="position: relative; z-index: 100;">
+                                <div class="profile_img_container mb-3">
+                                    <img class="profile_img" src="~/uploads/@ViewBag.ProfileImageName" />
+                                </div>
+                            </div>
+
+                            <h5>@Model.Freelancer.FreelancerName</h5>
+                            <hr />
+                            <div class="d-flex w-100">
+                                <div style="margin-right: auto" class="d-flex">
+                                    <i class="fa fa-location-arrow" style="color: #62646a" aria-hidden="true"></i>
+                                    <p style="margin-left: 8px; font-weight: 400; color: #62646a">
+                                        Location
+                                    </p>
+                                </div>
+                                <div>
+                                    <p style="color: #62646a">
+                                        <strong style="font-weight: 600">@ViewBag.Country</strong>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex w-100">
+                                <div style="margin-right: auto" class="d-flex">
+                                    <i class="fa fa-user" style="color: #62646a" aria-hidden="true"></i>
+                                    <p style="margin-left: 8px;font-weight: 400; color: #62646a">Member since</p>
+                                </div>
+                                <div>
+                                    <p style="color: #62646a">
+                                        <strong style="font-weight: 600">
+                                            @String.Format("{0:y}",
+                                            ViewBag.MemberSince)
+                                        </strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile_details mt-3" style="padding: 20px 30px 5px 30px">
+                            <h5>Description</h5>
+                            <p>@Model.Freelancer.Description</p>
+
+                            <div class="d-flex w-100 mb-0 mt-4">
+                                <div style="margin-right: auto" class="d-flex">
+                                    <i class="fa fa-list-ul" style="color: #62646a" aria-hidden="true"></i>
+                                    <p style="margin-left: 8px; font-weight: 400; color: #62646a">
+                                        Category
+                                    </p>
+                                </div>
+                                <div>
+                                    <p style="color: #62646a">
+                                        <strong style="font-weight: 600">@ViewBag.Category</strong>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex w-100 mb-0 mt-4">
+                                <div style="margin-right: auto" class="d-flex">
+                                    <i class="fa fa-phone" style="color: #62646a" aria-hidden="true"></i>
+                                    <p style="margin-left: 8px; font-weight: 400; color: #62646a">
+                                        Wallet
+                                    </p>
+                                </div>
+                                <div>
+                                    <p style="color: #62646a">
+                                        <strong style="font-weight: 600">@ViewBag.PhoneNumber</strong>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex w-100 mb-0 mt-4">
+                                <div style="margin-right: auto" class="d-flex">
+                                    <i class="fa fa-credit-card" style="color: #62646a" aria-hidden="true"></i>
+                                    <p style="margin-left: 8px; font-weight: 400; color: #62646a">
+                                        Wallet
+                                    </p>
+                                </div>
+                                <div>
+                                    <p style="color: #62646a">
+                                        <strong style="font-weight: 600">@ViewBag.Wallet</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile_details mt-3 d-flex align-items-center" style="padding: 10px 30px">
+                            <a style="text-decoration: none" class="d-flex" asp-controller="Login" asp-action="Index">
+                                <i class="fa fa-sign-out" style="color: #62646a; margin: 0 !important"
+                                   aria-hidden="true"></i>
+                                <p style="margin-left: 8px; font-weight: 400; color: #62646a; margin: 0 0 0px 5px">
+                                    Logout
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-8">
+                        <div class="orders_heading d-flex flex-row justify-content-between align-items-center mb-5">
+                            <div>
+                                <h5 class="mb-0">Orders</h5>
+                            </div>
+                            <div>
+                                <select class="form-select" name="orders" id="orders"
+                                        style="background:#fff; border:none; outline: none">
+                                    <option value="completed">Completed</option>
+                                    <option value="ongoing">Ongoing</option>
+                                    <option value="cancelled">Cancelled</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="gigs_heading">
+                            <div>
+                                <p>Active Gigs</p>
+                            </div>
+                            <div class="border"></div>
+                        </div>
+
+                        <div class="row">
+                            @foreach (var obj in Model.Gigs)
+                            {
+                                <div class="col-4 mt-4">
+                                    <div class="card w-100" style="position:relative">
+                                        <div class="card_image_container">
+                                            <img src="~/uploads/@obj.GigImageName1"
+                                            style="width: 100%; height: 100%; object-fit: cover" alt="@obj.Title">
+                                        </div>
+                                        <div class="card_icons">
+                                            <div class="card_action">
+                                                <a asp-controller="Gigs" asp-action="Edit" asp-route-id=@obj.GigId>
+                                                    <i class="fa fa-pencil" style="color: #0d6efd" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <h6 class="card-title">@obj.Title</h6>
+                                            <p class="card-text mt-4" style="color: #0d6efd; text-align: end">
+                                                Starting at $@obj.Price
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-4">
+                                <a asp-controller="Gigs" asp-action="Create" asp-route-id=@ViewBag.FreelancerId
+                                   style="text-decoration: none">
+                                    <div class="card w-100" style="position:relative; height: 225px">
+                                        <div style="height:100%"
+                                             class="d-flex flex-column align-items-center justify-content-center">
+                                            <img class="card-img-top mb-2"
+                                                 style="width: 80px !important; height: 80px !important;"
+                                                 src="~/images/add-01.png" alt="Add category">
+                                            <p style="font-weight: 500; color: #555; text-decoration: none; border: none">
+                                                Create a new gig
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

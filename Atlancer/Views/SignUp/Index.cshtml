@@ -1,0 +1,72 @@
+﻿@model SignUp
+
+@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Atlancer</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;1,100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/Atlancer.styles.css" asp-append-version="true" />
+</head>
+<body style="overflow:hidden">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white">
+        <img width="200px" class="p-4" src="~/images/logo-01-01.png" />
+    </nav>
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+            <div class="row d-flex align-items-center justify-content-center h-100">
+                <div class="col-md-8 col-lg-7 col-xl-6">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                         class="img-fluid" alt="Phone image">
+                </div>
+                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                    
+                    <form method="post">
+                        <h4 style="font-weight: 600">New Here?</h4>
+                        <p class="link-secondary mb-4">Sign up to continue</p>
+
+                        <span class="text-danger">@TempData["error"]</span>
+
+                        <div class="form-outline mb-4 mt-3">
+							<label asp-for="Email" style="font-weight: 600" class="form-label">Email</label>
+							<input asp-for="Email" type="email" id="form1Example13" class="form-control form-control-lg" />
+							<span asp-validation-for="Email" class="text-danger"></span>
+						</div>
+						<div class="form-outline mb-4">
+							<label asp-for="Password" style="font-weight: 600" class="form-label">Password</label>
+							<input asp-for="Password" type="password" id="form1Example13" class="form-control form-control-lg" />
+							<span asp-validation-for="Password" class="text-danger"></span>
+						</div>
+
+                        <div class="form-outline mb-4">
+                            <label style="font-weight: 600" class="form-label" for="form1Example23">User Type</label>
+                            @foreach (var item in Html.GetEnumSelectList<UserType>())
+                            {
+                                <div class="form-check">
+                                    <input asp-for="UserType" value="@item.Text" class="form-check-input" type="radio">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        @item.Text
+                                    </label>
+                                </div>
+                            }
+                        </div>
+
+                        <!-- Submit button -->
+                        <button type="submit" class="w-100 btn btn-primary btn-lg btn-block">Sign Up</button>
+
+                        <p class="text-center mt-5">Already a member? <a class="link-primary fw-bold" asp-controller="Login" asp-action="Index">Login</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
