@@ -35,7 +35,7 @@ namespace Atlancer.Controllers
                 {
                     var freelancer = _db.Freelancer.FromSqlRaw($"SELECT * FROM Freelancer WHERE Email=@email AND Password=@password", email, password).ToList();
                     // check if the count is 0
-                    if (freelancer == null)
+                    if (freelancer.Count == 0)
                     {
                         // invalid credentials
                         TempData["error"] = "Invalid credentials";
@@ -45,6 +45,7 @@ namespace Atlancer.Controllers
                     {
                         Globals.UserId = freelancer.ElementAt(0).FreelancerId;
                         Globals.UserType = "Freelancer";
+                        Globals.UserName = freelancer.ElementAt(0).FreelancerName;
                         return RedirectToAction("Index", "Home", new { userId = freelancer?.ElementAt(0).FreelancerId, userType = "Freelancer" });
                     }
                 }
@@ -53,7 +54,7 @@ namespace Atlancer.Controllers
                     var client = _db.Client.FromSqlRaw($"SELECT * FROM Client WHERE Email=@email AND Password=@password", email, password).ToList();
 
                     // check if the count is 0
-                    if (client == null)
+                    if (client.Count == 0)
                     {
                         // invalid credentials
                         TempData["error"] = "Invalid credentials";
@@ -62,6 +63,7 @@ namespace Atlancer.Controllers
                     {
                         Globals.UserId = client.ElementAt(0).ClientId;
                         Globals.UserType = "Client";
+                        Globals.UserName = client.ElementAt(0).ClientName;
                         return RedirectToAction("Index", "Home", new { userId = client?.ElementAt(0).ClientId, userType = "Client" });
                     }
                 }

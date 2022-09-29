@@ -29,6 +29,9 @@ namespace Atlancer.Models
         public string Description { get; set; }
         public DateTime PostingDate { get; set; } = DateTime.Now;
         public DateTime BidEndDate { get; set; } = DateTime.Now.AddDays(3);
+
+        // ongoing, completed
+        public string ProjectStatus { get; set; } = "Bidding";
         public string ProjectTime { get; set; }
         public string ClientId { get; set; }
 

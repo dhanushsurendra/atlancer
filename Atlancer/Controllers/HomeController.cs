@@ -21,7 +21,6 @@ namespace Atlancer.Controllers
 
         public IActionResult Index(string userId, string userType)
         {
-            Console.WriteLine(userType == Globals.UserTypes.Freelancer.ToString());
             if (userType == Globals.UserTypes.Freelancer.ToString())
             {
                 var freelancer = _db.Freelancer.Find(userId);

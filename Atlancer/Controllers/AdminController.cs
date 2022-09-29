@@ -19,14 +19,24 @@ namespace Atlancer.Controllers
             _db = db;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+
+            ViewBag.Projects = _db.Project.Count();
+            ViewBag.PayoutReleased = await _db.Freelancer.SumAsync(f => f.Wallet);
+            ViewBag.Revenue = _db.Admin.ToList().ElementAt(0).Revenue;
+            ViewBag.PayoutPending = _db.Admin.Select(a => a.Wallet);
+            ViewBag.TotalNoOfUsers = _db.Freelancer.Count() +  _db.Client.Count();
+            ViewBag.Wallet = _db.Admin.Select(a => a.Wallet);
+            ViewBag.Ongoing = _db.Project.Where(p => p.ProjectStatus == "Ongoing").Count();
+            ViewBag.Completed = _db.Project.Where(p => p.ProjectStatus == "Completed").Count();
+            ViewBag.Bidding = _db.Project.Where(p => p.ProjectStatus == "Bidding").Count();
+
             return View();
         }
 
         public IActionResult Login()
         {
-            // find if the credentials are correct
             return View();
         }
 
@@ -34,7 +44,6 @@ namespace Atlancer.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Login(Admin admin)
         {
-
             if (ModelState.IsValid)
             {
                 var email = new SqlParameter("@email", admin.Email);

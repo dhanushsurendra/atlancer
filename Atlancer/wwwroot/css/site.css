@@ -391,7 +391,7 @@ input:focus, textarea:focus {
 
 .box-1 {
     max-width: 450px;
-    padding: 10px 40px;
+    padding: 20px 40px 0 40px;
     user-select: none;
 }
 
@@ -406,8 +406,8 @@ input:focus, textarea:focus {
 }
 
 .box-1 img.pic {
-    width: 20px;
-    height: 20px;
+    width: 40px !important;
+    height: 40px !important;
     object-fit: cover;
 }
 
@@ -418,7 +418,7 @@ input:focus, textarea:focus {
 }
 
 .box-1 .name {
-    font-size: 11px;
+    font-size: 16px;
     font-weight: 600;
 }
 

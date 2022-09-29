@@ -46,13 +46,16 @@ namespace Atlancer.Migrations
 
                     b.HasKey("AdminId");
 
-                    b.ToTable("Admin");
+                    b.ToTable("Admin", (string)null);
                 });
 
             modelBuilder.Entity("Atlancer.Models.Bid", b =>
                 {
                     b.Property<string>("BidId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("AmountPaid")
+                        .HasColumnType("float");
 
                     b.Property<int>("BidAmount")
                         .HasColumnType("int");
@@ -72,13 +75,16 @@ namespace Atlancer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<double>("ServiceFree")
+                        .HasColumnType("float");
+
                     b.HasKey("BidId");
 
                     b.HasIndex("FreelancerId");
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("Bid");
+                    b.ToTable("Bid", (string)null);
                 });
 
             modelBuilder.Entity("Atlancer.Models.Client", b =>
@@ -116,7 +122,7 @@ namespace Atlancer.Migrations
 
                     b.HasKey("ClientId");
 
-                    b.ToTable("Client");
+                    b.ToTable("Client", (string)null);
                 });
 
             modelBuilder.Entity("Atlancer.Models.Feedback", b =>
@@ -149,7 +155,7 @@ namespace Atlancer.Migrations
 
                     b.HasIndex("FreelancerId");
 
-                    b.ToTable("Feedback");
+                    b.ToTable("Feedback", (string)null);
                 });
 
             modelBuilder.Entity("Atlancer.Models.Freelancer", b =>
@@ -205,7 +211,7 @@ namespace Atlancer.Migrations
 
                     b.HasKey("FreelancerId");
 
-                    b.ToTable("Freelancer");
+                    b.ToTable("Freelancer", (string)null);
                 });
 
             modelBuilder.Entity("Atlancer.Models.Gigs", b =>
@@ -248,7 +254,7 @@ namespace Atlancer.Migrations
 
                     b.HasIndex("FreelancerId");
 
-                    b.ToTable("Gig");
+                    b.ToTable("Gig", (string)null);
                 });
 
             modelBuilder.Entity("Atlancer.Models.Project", b =>
@@ -281,6 +287,10 @@ namespace Atlancer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ProjectStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ProjectTime")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -289,7 +299,7 @@ namespace Atlancer.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("Project");
+                    b.ToTable("Project", (string)null);
                 });
 
             modelBuilder.Entity("Atlancer.Models.Bid", b =>

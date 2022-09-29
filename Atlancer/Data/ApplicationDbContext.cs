@@ -18,5 +18,6 @@ namespace Atlancer.Data
         public DbSet<Feedback> Feedback { get; set; }
         public DbSet<Project> Project { get; set; }
         public DbSet<Bid> Bid { get; set; }
+        public DbSet<Payment> Payment { get; set; }
     }
 }

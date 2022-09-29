@@ -24,7 +24,10 @@ namespace Atlancer.Models
         public DateTime BidDate { get; set; }  = DateTime.Now;
 
         [Required(ErrorMessage = "Bid Amount is required")]
-        public float BidAmount { get; set; }
+        public int BidAmount { get; set; }
+
+        public double ServiceFree { get; set; } = 0.0;
+        public double AmountPaid { get; set; } = 0.0;
 
         [Required(ErrorMessage = "Cover Letter is required")]
         public string CoverLetter { get; set; } 

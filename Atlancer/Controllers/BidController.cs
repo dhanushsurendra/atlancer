@@ -1,8 +1,12 @@
 ﻿using Atlancer.Data;
 using Atlancer.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Net;
+using System.Security.Cryptography;
 
 namespace Atlancer.Controllers
 {
@@ -23,6 +27,8 @@ namespace Atlancer.Controllers
                 return NotFound();
             }
 
+            Globals.ProjectId = id;
+
             BidViewModel bidViewModel = new BidViewModel();
             ModelState.Remove("BidFreelancerList");
             ModelState.Remove("Project");
@@ -34,33 +40,49 @@ namespace Atlancer.Controllers
                 bidViewModel.Project = project;
             }
 
-            var bids = (from bid in _db.Bid
-                      join freelan in _db.Freelancer on bid.FreelancerId equals freelan.FreelancerId
-                      where bid.ProjectId == id
-                      select new { bid, freelan } ).ToList();
-
-            BidFreelancerList bidFreelancerList = new BidFreelancerList();
-
-            foreach (var bid in bids)
+            // check if the user can place a bid, if not disable the button 
+            var freelancerId = new SqlParameter("@id", Globals.UserId);
+            var bidexists = _db.Bid.FromSqlRaw("select * from bid where freelancerid=@id", freelancerId).Count();
+            if (bidexists > 0)
             {
-               BidFreelancerViewModel bidFreelancerViewModel = new BidFreelancerViewModel();
-               bidFreelancerViewModel.Freelancer = bid.freelan;
-               bidFreelancerViewModel.Bid = bid.bid;
-               bidFreelancerList.BidFreelancerViewModel.Add(bidFreelancerViewModel); 
+                ViewBag.Disable = true;
             }
-
-            bidViewModel.BidFreelancerList = bidFreelancerList;
-
-            ViewBag.UserType = "Freelancer";
 
             var freelancer = _db.Freelancer.Find(id);
 
-            if (freelancer != null)
+            var projectid = new SqlParameter("@id", id);
+            var bids = (from bid in _db.Bid
+                        join free in _db.Freelancer on bid.FreelancerId equals free.FreelancerId
+                        where bid.ProjectId == id
+                        select new { bid, free }
+            ).ToList();
+
+            List<Freelancer> freelancers = _db.Freelancer.ToList();
+
+            BidFreelancerList bidfreelancerlist = new BidFreelancerList();
+
+            foreach (var bid in bids)
             {
-                ViewBag.UserName = freelancer.FreelancerName;
+                BidFreelancerViewModel bidfreelancerviewmodel = new BidFreelancerViewModel();
+                bidfreelancerviewmodel.Freelancer = bid.free;
+                bidfreelancerviewmodel.Bid = bid.bid;
+                if (Globals.UserId == bid.free.FreelancerId)
+                {
+                    ViewBag.bidid = bid.bid.BidId;
+                }
+                bidfreelancerlist.BidFreelancerModel.Add(bidfreelancerviewmodel);
             }
 
-            ViewBag.UserId = Globals.UserId;
+            bidViewModel.BidFreelancerList = bidfreelancerlist;
+
+            ViewBag.usertype = Globals.UserType;
+
+            if (freelancer != null)
+            {
+                ViewBag.username = freelancer.FreelancerName;
+            }
+
+            ViewBag.userid = Globals.UserId;
 
             return View(bidViewModel);
         }
@@ -75,7 +97,7 @@ namespace Atlancer.Controllers
 
             ViewBag.UserType = Globals.UserType;
             Globals.ProjectId = id;
-            
+
             if (Globals.UserType == "Freelancer")
             {
                 ViewBag.UserName = _db.Freelancer.Find(Globals.UserId)?.FreelancerName;
@@ -84,6 +106,66 @@ namespace Atlancer.Controllers
 
             ViewBag.UserName = _db.Client.Find(Globals.UserId)?.ClientName;
             return View();
+        }
+
+        public IActionResult Edit(string? id)
+        {
+            if (id == "" || id == null)
+            {
+                return NotFound();
+            }
+
+            Globals.BidId = id;
+
+            //var bid = _db.Bid.Find(id);
+
+            //if (bid == null)
+            //{
+            //    return NotFound();
+            //}
+
+            return View();
+            //return View(bid);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Bid bid)
+        {
+            ModelState.Remove("FreelancerId");
+            ModelState.Remove("ProjectId");
+            ModelState.Remove("Freelancer");
+            ModelState.Remove("Project");
+            ModelState.Remove("BidId");
+
+            bid.BidId = Globals.BidId;
+            bid.FreelancerId = Globals.UserId;
+            bid.ProjectId = Globals.ProjectId;
+
+            var freelancer = _db.Freelancer.Find(Globals.UserId);
+            var project = _db.Project.Find(Globals.ProjectId);
+
+            if (freelancer != null)
+            {
+                bid.Freelancer = freelancer;
+            }
+
+            if (project != null)
+            {
+                bid.Project = project;
+            }
+
+
+            if (ModelState.IsValid)
+            {
+                //_db.Bid.Update(bid);
+                _db.SaveChanges();
+                TempData["success"] = "Bid updated successfully";
+                return RedirectToAction("Index", "Bid", new { id = Globals.ProjectId });
+            }
+
+
+            return View(bid);
         }
 
         [HttpPost]
@@ -123,7 +205,7 @@ namespace Atlancer.Controllers
 
             if (ModelState.IsValid)
             {
-                _db.Bid.Add(bid);
+                //_db.Bid.Add(bid);
                 _db.SaveChanges();
 
                 return RedirectToAction("Index", "Bid", new { id = project?.ProjectId });

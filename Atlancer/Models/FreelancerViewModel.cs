@@ -9,6 +9,8 @@ namespace Atlancer.Models
     {
         public Freelancer Freelancer { get; set; }
 
+        public List<Project> Projects { get; set; }
+
         public List<Gigs> Gigs { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace Atlancer.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Wallet = table.Column<float>(type: "real", nullable: false),
-                    Revenue = table.Column<float>(type: "real", nullable: false)
+                    Revenue = table.Column<float>(type: "real", nullable: false)    
                 },
                 constraints: table =>
                 {

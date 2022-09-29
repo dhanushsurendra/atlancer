@@ -33,6 +33,8 @@ namespace Atlancer.Controllers
             FreelancerViewModel freelancerViewModel = new FreelancerViewModel();
             ModelState.Remove("Gigs");
             ModelState.Remove("Freelancer");
+            ModelState.Remove("Projects");
+
 
             if (gigs != null)
             {

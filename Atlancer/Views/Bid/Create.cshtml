@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="~/Atlancer.styles.css" asp-append-version="true" />
 </head>
 
-<body>
+<body onload="calPrice()">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white">
             <div class="container-fluid" style="max-width: 1320px">
@@ -113,12 +113,12 @@
 
                         <div class="form-outline mb-4">
                             <label style="font-weight: 600" class="form-label" for="title">Service Fee (20% of hourly rate)</label>
-                            <input id="serviceValue" disabled type="number" class="form-control form-control-lg" />
+                            <input id="serviceValue" asp-for="ServiceFree" readonly type="number" class="form-control form-control-lg" />
                         </div>
 
                         <div class="form-outline mb-4">
                             <label style="font-weight: 600" class="form-label" for="title">You'll be paid (per hour)</label>
-                            <input id="actualValue" disabled type="number" class="form-control form-control-lg" />
+                            <input id="actualValue" asp-for="AmountPaid" readonly type="number" class="form-control form-control-lg" />
                         </div>
 
                         <div class="form-outline mb-4">
@@ -131,7 +131,7 @@
                         </div>
 
                         <div class="col-md-12 text-end">
-                            <button style="width: 20%;" type="submit" class="btn btn-primary">Place Bid</button>
+                            <button style="width: 20%;" class="btn btn-primary">Place Bid</button>
                         </div>
                     </form>
                 </div>
@@ -141,6 +141,7 @@
 
 </body>
 <script>
+
     const previewImage = (event, id) => {
 
         const imageFiles = event.target.files;
@@ -160,13 +161,12 @@
         var serviceFee = 0.20 * value;
         var acutalValue = value - serviceFee;
 
-        console.log(serviceFee)
-        console.log(acutalValue)
+        console.log(value)
 
         document.getElementById('serviceValue').value = serviceFee.toFixed(2)
         document.getElementById('actualValue').value = acutalValue.toFixed(2)
-     
     }
+
 </script>
 
 </html>

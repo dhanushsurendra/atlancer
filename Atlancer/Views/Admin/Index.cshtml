@@ -7,7 +7,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title> Responsiive Admin Dashboard | CodingLab </title>
+    <title> Admin Dashboard | Atlancer </title>
     <link rel="stylesheet" href="~/css/admin.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -57,11 +57,7 @@
                 <div class="box">
                     <div class="right-side">
                         <div class="box-topic">Total Projects</div>
-                        <div class="number">40,876</div>
-                        <div class="indicator">
-                            <i class='bx bx-up-arrow-alt'></i>
-                            <span class="text">Up from yesterday</span>
-                        </div>
+                        <div class="number">@ViewBag.Projects</div>
                     </div>
                     <div style="height: 100%">
                         <i class='bx bx-file icon project'></i>
@@ -70,33 +66,21 @@
                 <div class="box">
                     <div class="right-side">
                         <div class="box-topic">Payout Released</div>
-                        <div class="number">38,876</div>
-                        <div class="indicator">
-                            <i class='bx bx-up-arrow-alt'></i>
-                            <span class="text">Up from yesterday</span>
-                        </div>
+                        <div class="number">@ViewBag.PayoutReleased</div>
                     </div>
                     <i class='bx bx-log-in-circle icon payout'></i>
                 </div>
                 <div class="box">
                     <div class="right-side">
                         <div class="box-topic">Payout Pending</div>
-                        <div class="number">$12,876</div>
-                        <div class="indicator">
-                            <i class='bx bx-up-arrow-alt'></i>
-                            <span class="text">Up from yesterday</span>
-                        </div>
+                        <div class="number">@ViewBag.Pending</div>
                     </div>
                     <i class='bx bx-log-out-circle icon pending'></i>
                 </div>
                 <div class="box">
                     <div class="right-side">
                         <div class="box-topic">Total No. of Users</div>
-                        <div class="number">11,086</div>
-                        <div class="indicator">
-                            <i class='bx bx-down-arrow-alt down'></i>
-                            <span class="text">Down From Today</span>
-                        </div>
+                        <div class="number">@ViewBag.TotalNoOfUsers</div>
                     </div>
                     <i class='bx bx-user icon users'></i>
                 </div>
@@ -105,45 +89,29 @@
             <div class="overview-boxes">
                 <div class="box">
                     <div class="right-side">
-                        <div class="box-topic">Wallet Balance</div>
-                        <div class="number">40,876</div>
-                        <div class="indicator">
-                            <i class='bx bx-up-arrow-alt'></i>
-                            <span class="text">Up from yesterday</span>
-                        </div>
+                        <div class="box-topic">Revenue</div>
+                        <div class="number">@ViewBag.Revenue</div>
                     </div>
                     <i class='bx bx-wallet-alt icon'></i>
                 </div>
                 <div class="box">
                     <div class="right-side">
                         <div class="box-topic">Ongoing Projects</div>
-                        <div class="number">38,876</div>
-                        <div class="indicator">
-                            <i class='bx bx-up-arrow-alt'></i>
-                            <span class="text">Up from yesterday</span>
-                        </div>
+                        <div class="number">@ViewBag.Ongoing</div>
                     </div>
                     <i class="fa fa-spinner icon wallet" style="font-size: 25px;" aria-hidden="true"></i>
                 </div>
                 <div class="box">
                     <div class="right-side">
                         <div class="box-topic">Completed Projects</div>
-                        <div class="number">$12,876</div>
-                        <div class="indicator">
-                            <i class='bx bx-up-arrow-alt'></i>
-                            <span class="text">Up from yesterday</span>
-                        </div>
+                        <div class="number">@ViewBag.Completed</div>
                     </div>
                     <i class="fa fa-list icon completed" style="font-size: 25px;" aria-hidden="true"></i>
                 </div>
                 <div class="box">
                     <div class="right-side">
-                        <div class="box-topic">Total No. of Freelancers</div>
-                        <div class="number">11,086</div>
-                        <div class="indicator">
-                            <i class='bx bx-down-arrow-alt down'></i>
-                            <span class="text">Down From Today</span>
-                        </div>
+                        <div class="box-topic">Currently Bidding</div>
+                        <div class="number">@ViewBag.Bidding</div>
                     </div>
                     <i class='bx bx-user icon freelancers'></i>
                 </div>

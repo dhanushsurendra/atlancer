@@ -55,8 +55,7 @@ namespace Atlancer.Controllers
 
             // fetch freelancer data
             var freelancer = _db.Freelancer.Find(Globals.UserId);
-            Console.WriteLine(Globals.UserId);
-            Console.WriteLine(Globals.UserType);
+     
             if (freelancer != null)
             {
                 gig.Freelancer = freelancer;
