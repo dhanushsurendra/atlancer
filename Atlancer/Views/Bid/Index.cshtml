@@ -196,46 +196,56 @@
                     </div>
                     <div class="col-8">
                         <h5 class="mb-4">Previous Bids</h5>
-                        @foreach (var item in Model.BidFreelancerList.BidFreelancerModel)
+                        @if (Model.BidFreelancerList.BidFreelancerModel.Count() > 0)
                         {
-                        <div style="width: 100%">
-                            <div class="bid_row">
-                                <div class="profile_img_container" style="flex: 0 0 60px">
-                                    <img src="~/uploads/@item.Freelancer.ProfileImageName" class="profile_image" />
-                                </div>
-                                    <div style="flex: 6 0 0px">
-                                        <h6 class="mb-0" style="color: #0d6efd">@item.Freelancer.FreelancerName</h6>
-                                        <p style="font-size: 14px; font-weight: 500" class="mt-0 mb-0">@item.Freelancer.Category</p>
-                                        <p>India</p>
-                                        <div class="d-flex justify-content-between">
-                                            <p><span style="font-weight: 700">$@item.Bid.BidAmount</span> / hr</p>
+                            @foreach (var item in Model.BidFreelancerList.BidFreelancerModel)
+                            {
+                                <div style="width: 100%">
+                                    <div class="bid_row">
+                                        <div class="profile_img_container" style="flex: 0 0 60px">
+                                            <img src="~/uploads/@item.Freelancer.ProfileImageName" class="profile_image" />
+                                        </div>
+                                        <div style="flex: 6 0 0px">
+                                            <a asp-controller="Freelancer" asp-action="Index" asp-route-id=@item.Freelancer.FreelancerId class="mb-0" style="color: #0d6efd">@item.Freelancer.FreelancerName</a>
+                                            <p style="font-size: 14px; font-weight: 500" class="mt-0 mb-0">@item.Freelancer.Category</p>
+                                            <p>India</p>
+                                            <div class="d-flex justify-content-between">
+                                                <p><span style="font-weight: 700">$@item.Bid.BidAmount</span> / hr</p>
                                                 @if (ViewBag.UserType == "Client")
                                                 {
                                                     <p><span style="font-weight: 700">$@item.Freelancer.Wallet</span> earned</p>
                                                 }
-                                        </div>
-                                        <div class="d-flex">
-                                            <i class="fa fa-envelope" style="color: #0d6efd; margin-right: 10px; margin-top: 4px" aria-hidden="true"></i>
-                                            <p>@String.Format("{0:m}", item.Bid.BidDate)</p>
-                                        </div>
-                                            @if (ViewBag.UserType == "Client") {
+                                            </div>
+                                            <div class="d-flex">
+                                                <i class="fa fa-envelope" style="color: #0d6efd; margin-right: 10px; margin-top: 4px" aria-hidden="true"></i>
+                                                <p>@String.Format("{0:m}", item.Bid.BidDate)</p>
+                                            </div>
+                                            @if (ViewBag.UserType == "Client")
+                                            {
                                                 <p style="margin-bottom: 0;"><span style="font-weight: 600">Cover Letter</span> - @item.Bid.CoverLetter</p>
                                             }
-                                     </div>
-                                @if (ViewBag.UserType == "Client") {
-                                    <div style="flex: 1 0 0px">
-                                        <a asp-controller="Payment" asp-action="Index" asp-route-freelancerId=@item.Freelancer.FreelancerId class="btn btn-primary" style="border-radius: 100px !important; width: 80px !important">Hire</a>
+                                        </div>
+                                        @if (ViewBag.UserType == "Client")
+                                        {
+                                            <div style="flex: 1 0 0px">
+                                                <a asp-controller="Payment" asp-action="Index" asp-route-freelancerId=@item.Freelancer.FreelancerId class="btn btn-primary" style="border-radius: 100px !important; width: 80px !important">Hire</a>
+                                            </div>
+                                        }
+                                        @if (ViewBag.UserId == @item.Freelancer.FreelancerId)
+                                        {
+                                            <div style="flex: 1 0 0px">
+                                                <a asp-controller="Bid" asp-action="Edit" asp-route-id=@ViewBag.BidId class="btn btn-primary" style="border-radius: 100px !important; width: 80px !important">Edit</a>
+                                            </div>
+                                        }
                                     </div>
-                                }
-                                @if (ViewBag.UserId == @item.Freelancer.FreelancerId)
-                                {
-                                    <div style="flex: 1 0 0px">
-                                        <a asp-controller="Bid" asp-action="Edit" asp-route-id=@ViewBag.BidId class="btn btn-primary" style="border-radius: 100px !important; width: 80px !important">Edit</a>
-                                    </div>
-                                }
+                                    <hr>
+                                </div>
+                            }
+                        } else {
+                            <div class="w-100 d-flex flex-column align-items-center justify-content-center mb-5">
+                                <img width="300px" src="~/images/empty.png" alt="empty" />
+                                <p style="font-size: 16px; margin-top: 5px">No bids to show!</p>
                             </div>
-                            <hr>
-                        </div>
                         }
                     </div>
                 </div>

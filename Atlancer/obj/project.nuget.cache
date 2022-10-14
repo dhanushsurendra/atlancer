@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZqcQPS7WXy8bF+iUn0+XEaMy/ouEyfcZmcJnAxBMPhOtGxxCwl9x/EUrkIplFj31glCJd24jM+gy3IHLVlD+kA==",
+  "dgSpecHash": "POzoM6Sx6R/c7Ezt9T8gt3YmExb23mDDU7R99soxGX1UCJsMOYv14lLinQ9Doqh5jitpmdXrTpTUH0hTNHB69g==",
   "success": true,
   "projectFilePath": "C:\\Users\\Dhanush\\source\\repos\\Atlancer\\Atlancer\\Atlancer.csproj",
   "expectedPackageFiles": [
@@ -175,5 +175,12 @@
     "C:\\Users\\Dhanush\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\Dhanush\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1803",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "You are running the 'restore' operation with an 'HTTP' source, 'http://nancyfx.org/'. Non-HTTPS access will be removed in a future version. Consider migrating to an 'HTTPS' source."
+    }
+  ]
 }

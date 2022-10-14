@@ -35,7 +35,6 @@ namespace Atlancer.Controllers
             ModelState.Remove("Freelancer");
             ModelState.Remove("Projects");
 
-
             if (gigs != null)
             {
                 freelancerViewModel.Gigs = gigs;
@@ -45,6 +44,13 @@ namespace Atlancer.Controllers
             if (freelancer != null)
             {
                 freelancerViewModel.Freelancer = freelancer;
+            }
+
+            var projects = _db.Project.Where(item => item.ProjectStatus != "Bidding").ToList();
+
+            if (projects != null)
+            {
+                freelancerViewModel.Projects = projects;
             }
 
             ViewBag.UserType = "Freelancer";
@@ -61,12 +67,71 @@ namespace Atlancer.Controllers
             ViewBag.PhoneNumber = freelancer?.PhoneNumber;
             ViewBag.Category = freelancer?.Category;
 
+            if (Globals.UserType == "Client")
+            {
+                ViewBag.View = true;
+            } else
+            {
+                ViewBag.View = false;
+            }
+
+
+            Console.WriteLine(ViewBag.View);
+
             if (freelancer == null)
             {
                 return NotFound();
             }
 
             return View(freelancerViewModel);
+        }
+
+       
+
+        public IActionResult Approval(string? id)
+        {
+            if (id == "" || id == null)
+            {
+                return NotFound();
+            }
+
+            var project = _db.Project.Find(id);
+
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            project.ProjectStatus = "Pending Approval";
+            _db.Project.Update(project);
+            _db.SaveChanges();
+
+            ViewBag.FreelancerId = Globals.UserId;
+
+            return View();
+        }
+
+        public IActionResult Approved(string? id)
+        {
+            if (id == "" || id == null)
+            {
+                return NotFound();
+            }
+
+            var project = _db.Project.Find(id);
+
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            project.ProjectStatus = "Completed";
+            _db.Project.Update(project);
+            _db.SaveChanges();
+
+            ViewBag.Client = Globals.UserId;
+
+            return View();
         }
 
         public IActionResult Create(string email, string password)

@@ -51,6 +51,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmVlZGJhY2tcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Dhanush/source/repos/Atlancer/Atlancer/Views/Freelancer/Approval.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRnJlZWxhbmNlclxBcHByb3ZhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Dhanush/source/repos/Atlancer/Atlancer/Views/Freelancer/Approved.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRnJlZWxhbmNlclxBcHByb3ZlZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Dhanush/source/repos/Atlancer/Atlancer/Views/Freelancer/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRnJlZWxhbmNlclxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

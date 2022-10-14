@@ -15,9 +15,10 @@ namespace Atlancer.Data
         public DbSet<Freelancer> Freelancer { get; set; }
         public DbSet<Gigs> Gig { get; set; }
         public DbSet<Client> Client { get; set; }
-        public DbSet<Feedback> Feedback { get; set; }
+        public DbSet<Payment> Payment { get; set; }
         public DbSet<Project> Project { get; set; }
         public DbSet<Bid> Bid { get; set; }
-        public DbSet<Payment> Payment { get; set; }
+        public DbSet<Feedback> Feedback { get; set; }
+
     }
 }

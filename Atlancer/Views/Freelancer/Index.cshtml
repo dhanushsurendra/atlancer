@@ -4,6 +4,10 @@
     Layout = null;
 }
 
+@{
+    string[] categories = { "Ongoing", "Pending Approval", "Completed" };
+}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -106,11 +110,13 @@
                         <div class="profile_details d-flex align-items-center flex-column"
                              style="padding: 20px 30px 5px 30px">
 
-                            <a asp-controller="Freelancer" asp-action="Edit" asp-route-id=@ViewBag.UserId
-                               class="profile_online">
-                                <i class="fa fa-pencil"
-                                   style="display: inline-block; position: initial; font-size: 20px !important; color: #0d6efd !important;"></i>
-                            </a>
+                             @if (!ViewBag.View) {
+                                <a asp-controller="Freelancer" asp-action="Edit" asp-route-id=@ViewBag.UserId
+                                   class="profile_online">
+                                    <i class="fa fa-pencil"
+                                       style="display: inline-block; position: initial; font-size: 20px !important; color: #0d6efd !important;"></i>
+                                </a>
+                             }
                             <div style="position: relative; z-index: 100;">
                                 <div class="profile_img_container mb-3">
                                     <img class="profile_img" src="~/uploads/@ViewBag.ProfileImageName" />
@@ -195,35 +201,99 @@
                             </div>
                         </div>
 
-                        <div class="profile_details mt-3 d-flex align-items-center" style="padding: 10px 30px">
-                            <a style="text-decoration: none" class="d-flex" asp-controller="Login" asp-action="Index">
-                                <i class="fa fa-sign-out" style="color: #0d6efd; margin-top: 3px"
+                        @if (!ViewBag.View) {
+                            <div class="profile_details mt-3 d-flex align-items-center" style="padding: 10px 30px">
+                                <a style="text-decoration: none" class="d-flex" asp-controller="Login" asp-action="Index">
+                                    <i class="fa fa-sign-out" style="color: #0d6efd; margin-top: 3px"
                                    aria-hidden="true"></i>
-                                <p style="margin-left: 8px; font-weight: 400; color: #62646a; margin: 0 0 0px 5px">
-                                    Logout
-                                </p>
-                            </a>
+                                    <p style="margin-left: 8px; font-weight: 400; color: #62646a; margin: 0 0 0px 5px">
+                                        Logout
+                                    </p>
+                                </a>
+                            </div>
+                        }
+                       
+                        <div class="mt-3">
+                            <h5>Reviews</h5>
+                            <div class="w-100 mt-4">
+                                <div style="width: 100%">
+                                    <div class="bid_row">
+                                        <div class="profile_img_container" style="flex: 0 0 60px">
+                                            <img src="~/images/download.jpg" class="profile_image" />
+                                        </div>
+                                        <div style="margin-right: auto; flex: 3 0 0">
+                                            <h6 class="mb-0" style="color: #0d6efd">Dhanush V S</h6>
+                                            <div class="d-flex mt-1">
+                                                <i class="fa fa-star" style="color: #e59819; margin-top: 1px; margin-right: 5px" aria-hidden="true"></i>
+                                                <p style="font-size: 14px; font-weight: 500" class="mt-0 mb-0">4.5/5</p>
+                                            </div>
+                                        </div>
+                                        <div style="flex: 1 0 0px">
+                                            <p>@String.Format("{0:y}", DateTime.Now).Split(' ')[0].Substring(0, 3) @String.Format("{0:y}", DateTime.Now).Split(' ')[1]</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="col-8">
-                        <div class="orders_heading d-flex flex-row justify-content-between align-items-center mb-5">
-                            
-                                <div>
-                                    <div>
-                                        <h5 class="mb-0">Orders - Completed</h5>
-                                    </div>
-                                    <div>
-                                        <select class="form-select" name="orders" id="orders"
-                                                style="background:#fff; border:none; outline: none">
-                                            <option value="completed">Completed</option>
-                                            <option value="ongoing">Ongoing</option>
-                                            <option value="cancelled">Cancelled</option>
-                                        </select>
-                                    </div>
+                        @if (!ViewBag.View) {
+                            @foreach(var category in categories) 
+                            {
+                                <div class="orders_heading mb-3">
+                                    <h5 class="mb-0">Orders - @category</h5>
                                 </div>
-                            
-                        </div>
+                                @if (Model.Projects.Count > 0)
+                                {
+                                    @foreach (var item in Model.Projects)
+                                    {
+                                        @if (item.ProjectStatus == category && item.ProjectStatus != "Bidding")
+                                        {
+                                            <div class="col-4 mb-3">
+                                                <div class="card w-100">
+                                                    <div class="card-body">
+                                                        <p class="card-title" style="font-size: 20px; font-weight: 500; margin-bottom: 10px">@item.ProjectName</p>
+                                                        <div class="d-flex w-100 align-content-center justify-content-between">
+                                                            <div style="margin-right: auto" class="d-flex mb-2">
+                                                                <i class="fa fa-clock-o text-danger" aria-hidden="true"></i>
+                                                                <h6 style="margin-left: 10px; margin-top: .5px; font-size: 14px" class="text-danger card-subtitle">
+                                                                    @String.Format("{0:m}", @item.ProjectTime)
+                                                                </h6>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="d-flex w-100">
+                                                            <div style="margin-right: auto" class="d-flex mt-2">
+                                                                <i class="fa fa-list-ul" style="color: #0d6efd" aria-hidden="true"></i>
+                                                                <h6 style="margin-left: 10px; margin-top: .5px;" class="card-subtitle text-muted">
+                                                                    @item.Category
+                                                                </h6>
+                                                            </div>
+                                                        </div>
+                                                        @if (item.ProjectStatus == "Ongoing")
+                                                        {
+                                                            <a asp-controller="Freelancer" asp-action="Approval" asp-route-id=@item.ProjectId class="btn mt-4" style="background-color: rgba(13, 110, 253, .05); color: #0d6efd">Completed</a>
+                                                        }
+                                                        @if (item.ProjectStatus == "Pending Approval")
+                                                        {
+                                                            <a class="btn mt-4" style="background-color: rgba(13, 110, 253, .05); color: #0d6efd">Waiting for approval</a>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                } else {
+                                    <div class="w-100 d-flex flex-column align-items-center justify-content-center mb-5">
+                                        <img width="200px" src="~/images/empty.png" alt="empty" />
+                                        <p style="font-size: 14px; margin-top: 5px">No orders to show!</p>
+                                    </div>
+                                }
+                            }
+                        }
+                        
                         <div class="gigs_heading">
                             <div>
                                 <p>Active Gigs</p>
@@ -240,13 +310,16 @@
                                             <img src="~/uploads/@obj.GigImageName1"
                                             style="width: 100%; height: 100%; object-fit: cover" alt="@obj.Title">
                                         </div>
-                                        <div class="card_icons">
-                                            <div class="card_action">
-                                                <a asp-controller="Gigs" asp-action="Edit" asp-route-id=@obj.GigId>
-                                                    <i class="fa fa-pencil" style="color: #0d6efd" aria-hidden="true"></i>
-                                                </a>
+                                        @if (ViewBag.View)
+                                        {
+                                            <div class="card_icons">
+                                                <div class="card_action">
+                                                    <a asp-controller="Gigs" asp-action="Edit" asp-route-id=@obj.GigId>
+                                                        <i class="fa fa-pencil" style="color: #0d6efd" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
+                                        }
                                         <div class="card-body">
                                             <h6 class="card-title">@obj.Title</h6>
                                             <p class="card-text mt-4" style="color: #0d6efd; text-align: end">
@@ -259,26 +332,30 @@
 
                         </div>
 
-                        <div class="row mt-4">
-                            <div class="col-4">
-                                <a asp-controller="Gigs" asp-action="Create" asp-route-id=@ViewBag.FreelancerId
+                        @if (!ViewBag.View)
+                        {
+                            <div class="row mt-4">
+                                <div class="col-4">
+                                    <a asp-controller="Gigs" asp-action="Create" asp-route-id=@ViewBag.FreelancerId
                                    style="text-decoration: none">
-                                    <div class="card w-100" style="position:relative; height: 225px">
-                                        <div style="height:100%"
+                                        <div class="card w-100" style="position:relative; height: 225px">
+                                            <div style="height:100%"
                                              class="d-flex flex-column align-items-center justify-content-center">
-                                            <img class="card-img-top mb-2"
+                                                <img class="card-img-top mb-2"
                                                  style="width: 80px !important; height: 80px !important;"
                                                  src="~/images/add-01.png" alt="Add category">
-                                            <p style="font-weight: 500; color: #555; text-decoration: none; border: none">
-                                                Create a new gig
-                                            </p>
+                                                <p style="font-weight: 500; color: #555; text-decoration: none; border: none">
+                                                    Create a new gig
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
+                        }
                     </div>
                 </div>
+
             </section>
         </main>
     </div>

@@ -104,12 +104,34 @@
                     </h2>
                     <p>Looking for work? <a asp-controller="" asp-action="">Browse jobs</a></p>
                     <div class="row" style="margin-top: 30px !important">
+                        
+                            <div class="col-3 mb-3">
+                                <div class="card w-100" style="background-color: rgba(13, 110, 253, .08); border: none; outline: none">
+                                    <div class="card-body">
+                                        <div class="display: inline-block">
+                                        <h5 style="color: #000" class="text-start category_heading">Graphics and Design</h5>
+                                        </div>
+                                        <div class="d-flex mt-3">
+                                            <div class="d-flex w-50">
+                                                <div style="color: #0d6efd; margin-right: 5px">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                </div>
+                                                <p>4.79/5</p>
+                                            </div>
+                                            <div class="w-50">
+                                                <p>1,245 skills</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
 
-                        <div class="col-3 mb-3">
+                         <div class="col-3 mb-3">
                             <div class="card w-100" style="background-color: rgba(13, 110, 253, .08); border: none; outline: none">
                                 <div class="card-body">
                                     <div class="display: inline-block">
-                                        <h4 style="color: #000" class="text-start category_heading">Development & IT</h4>
+                                        <h5 style="color: #000" class="text-start category_heading">Video and Animation</h5>
                                     </div>
                                     <div class="d-flex mt-3">
                                         <div class="d-flex w-50">
@@ -130,17 +152,17 @@
                             <div class="card w-100" style="background-color: rgba(13, 110, 253, .08); border: none; outline: none">
                                 <div class="card-body">
                                     <div class="display: inline-block">
-                                        <h4 style="color: #000" class="text-start category_heading">Development & IT</h4>
+                                        <h5 style="color: #000" class="text-start category_heading">Programing and Tech</h5>
                                     </div>
                                     <div class="d-flex mt-3">
                                         <div class="d-flex w-50">
                                             <div style="color: #0d6efd; margin-right: 5px">
                                                 <i class="fa fa-star" aria-hidden="true"></i>
                                             </div>
-                                            <p>4.85/5</p>
+                                            <p>4.64/5</p>
                                         </div>
                                         <div class="w-50">
-                                            <p>1,853 skills</p>
+                                            <p>2,525 skills</p>
                                         </div>
                                     </div>
                                 </div>
@@ -151,38 +173,17 @@
                             <div class="card w-100" style="background-color: rgba(13, 110, 253, .08); border: none; outline: none">
                                 <div class="card-body">
                                     <div class="display: inline-block">
-                                        <h4 style="color: #000" class="text-start category_heading">Development & IT</h4>
+                                        <h5 style="color: #000" class="text-start category_heading">Writing and Translation</h5>
                                     </div>
                                     <div class="d-flex mt-3">
                                         <div class="d-flex w-50">
                                             <div style="color: #0d6efd; margin-right: 5px">
                                                 <i class="fa fa-star" aria-hidden="true"></i>
                                             </div>
-                                            <p>4.85/5</p>
+                                            <p>4.23/5</p>
                                         </div>
                                         <div class="w-50">
-                                            <p>1,853 skills</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                         <div class="col-3 mb-3">
-                            <div class="card w-100" style="background-color: rgba(13, 110, 253, .08); border: none; outline: none">
-                                <div class="card-body">
-                                    <div class="display: inline-block">
-                                        <h4 style="color: #000" class="text-start category_heading">Development & IT</h4>
-                                    </div>
-                                    <div class="d-flex mt-3">
-                                        <div class="d-flex w-50">
-                                            <div style="color: #0d6efd; margin-right: 5px">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                            </div>
-                                            <p>4.85/5</p>
-                                        </div>
-                                        <div class="w-50">
-                                            <p>1,853 skills</p>
+                                            <p>1,364 skills</p>
                                         </div>
                                     </div>
                                 </div>
@@ -196,40 +197,51 @@
                         <h2>
                             Browse Project
                         </h2>
-                        <p>Looking for projects to work on?</p>
+                        @if (Model.Count() > 0)
+                        {
+                            <p>Looking for projects to work on?</p>
+                        }
 
                         <div class="row" style="margin-top: 30px !important">
-                            @foreach (var item in Model)
+                            @if (Model.Count() > 0)
                             {
-                                <div class="col-3 mb-3">
-                                    <div class="card w-100">
-                                        <div class="card-body">
-                                            <p class="card-title" style="font-size: 20px; font-weight: 500; margin-bottom: 10px">@item.ProjectName</p>
-                                            <div class="d-flex w-100 align-content-center justify-content-between">
-                                                <h6 class="card-subtitle mb-2 text-muted">$@item.Budget</h6>
-                                                <h6 class="card-subtitle mb-2 text-muted">@String.Format("{0:m}", item.BidEndDate)</h6>
-                                            </div>
-
-                                            <div class="d-flex w-100">
-                                                <div style="margin-right: auto" class="d-flex mt-2">
-                                                    <i class="fa fa-list-ul" style="color: #0d6efd" aria-hidden="true"></i>
-                                                    <h6 style="margin-left: 10px; margin-top: .5px;" class="card-subtitle text-muted">
-                                                        @item.Category
-                                                    </h6>
+                                @foreach (var item in Model)
+                                {
+                                    <div class="col-3 mb-3">
+                                        <div class="card w-100">
+                                            <div class="card-body">
+                                                <p class="card-title" style="font-size: 20px; font-weight: 500; margin-bottom: 10px">@item.ProjectName</p>
+                                                <div class="d-flex w-100 align-content-center justify-content-between">
+                                                    <h6 class="card-subtitle mb-2 text-muted">$@item.Budget</h6>
+                                                    <h6 class="card-subtitle mb-2 text-muted">@String.Format("{0:m}", item.BidEndDate)</h6>
                                                 </div>
-                                            </div>
 
-                                            <div class="d-flex w-100">
-                                                <div style="margin-right: auto" class="d-flex mt-4">
-                                                    <i class="fa fa-clock-o" style="color: #0d6efd" aria-hidden="true"></i>
-                                                    <h6 style="margin-left: 10px; margin-top: .5px" class="card-subtitle text-muted">
-                                                        @item.ProjectTime
-                                                    </h6>
+                                                <div class="d-flex w-100">
+                                                    <div style="margin-right: auto" class="d-flex mt-2">
+                                                        <i class="fa fa-list-ul" style="color: #0d6efd" aria-hidden="true"></i>
+                                                        <h6 style="margin-left: 10px; margin-top: .5px;" class="card-subtitle text-muted">
+                                                            @item.Category
+                                                        </h6>
+                                                    </div>
                                                 </div>
+
+                                                <div class="d-flex w-100">
+                                                    <div style="margin-right: auto" class="d-flex mt-4">
+                                                        <i class="fa fa-clock-o" style="color: #0d6efd" aria-hidden="true"></i>
+                                                        <h6 style="margin-left: 10px; margin-top: .5px" class="card-subtitle text-muted">
+                                                            @item.ProjectTime
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                                <a asp-controller="Bid" asp-action="Index" asp-route-id=@item.ProjectId class="btn mt-4" style="background-color: rgba(13, 110, 253, .05); color: #0d6efd">Explore</a>
                                             </div>
-                                            <a asp-controller="Bid" asp-action="Index" asp-route-id=@item.ProjectId class="btn mt-4" style="background-color: rgba(13, 110, 253, .05); color: #0d6efd">Explore</a>
                                         </div>
                                     </div>
+                                } 
+                            } else {
+                                <div class="w-100 d-flex flex-column align-items-center justify-content-center">
+                                    <img width="400px" src="~/images//empty.png" alt="empty" />
+                                    <p style="font-size: 20px; margin-top: 5px">No jobs to show!</p>
                                 </div>
                             }
                         </div>

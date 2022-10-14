@@ -111,7 +111,7 @@ namespace Atlancer.Controllers
                 _db.Database.ExecuteSqlRaw("UPDATE Project SET ProjectStatus='Ongoing' WHERE ProjectId=@projectId", projectId);
 
                 // add a new payment
-                //_db.Payment.Add(payment);
+                _db.Payment.Add(payment);
                 _db.SaveChanges();
                 return RedirectToAction("Index", "Client", new { id = Globals.UserId });
             }

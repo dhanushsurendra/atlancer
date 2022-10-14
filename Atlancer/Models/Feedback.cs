@@ -17,7 +17,7 @@ namespace Atlancer.Models
         [ForeignKey("ClientId")]
         public virtual Client Client { get; set; }
 
-        public string FreelancerId { get; set; }
+        public string? FreelancerId { get; set; }
 
         [ForeignKey("FreelancerId")]
         public virtual Freelancer Freelancer { get; set; }
