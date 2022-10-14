@@ -16,7 +16,7 @@ namespace Atlancer.Controllers
         }
 
         // GET: FeedbackController1
-        public ActionResult Index(string? id)
+        public ActionResult Create(string? id)
         {
 
             if (id == "" || id == null)
@@ -24,7 +24,7 @@ namespace Atlancer.Controllers
                 return NotFound();
             }
 
-            Globals.FreelancerId = id;
+            Console.WriteLine(Globals.FreelancerId);
             ViewBag.UserId = Globals.UserId;
             ViewBag.UserType = "Client";
             ViewBag.UserName = Globals.UserName;
@@ -34,7 +34,7 @@ namespace Atlancer.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(Feedback feedback)
+        public ActionResult Create(Feedback feedback)
         {
             ModelState.Remove("FeedbackId");
             ModelState.Remove("ClientId");
@@ -52,7 +52,7 @@ namespace Atlancer.Controllers
 
             feedback.FeedbackId = id;
             feedback.ClientId = Globals.UserId;
-            feedback.FreelancerId = Globals.FreelancerId;
+            feedback.FreelancerId = "76904812b4";
 
             if (client != null)
             {
@@ -73,75 +73,6 @@ namespace Atlancer.Controllers
             }
 
             return View();
-        }
-
-        // GET: FeedbackController1/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: FeedbackController1/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: FeedbackController1/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: FeedbackController1/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: FeedbackController1/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: FeedbackController1/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: FeedbackController1/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

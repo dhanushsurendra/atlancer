@@ -3,6 +3,7 @@ using Atlancer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Packaging.Signing;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 
@@ -27,6 +28,11 @@ namespace Atlancer.Controllers
                 return NotFound();
             }
 
+            var clientFeedback = (from feedback in _db.Feedback
+                            join client in _db.Client on feedback.ClientId equals client.ClientId
+                            select new { feedback, client }
+            ).ToList();
+
             var fId = new SqlParameter("@id", id);
             List<Gigs> gigs = _db.Gig.FromSqlRaw("SELECT * FROM Gig WHERE FreelancerId=@id", fId).ToList();
 
@@ -34,6 +40,15 @@ namespace Atlancer.Controllers
             ModelState.Remove("Gigs");
             ModelState.Remove("Freelancer");
             ModelState.Remove("Projects");
+            ModelState.Remove("Feedbacks");
+
+            foreach (var item in clientFeedback)
+            {
+                ClientFeedbackViewModel clientFeedbackViewModel = new ClientFeedbackViewModel();
+                clientFeedbackViewModel.Client = item.client;
+                clientFeedbackViewModel.Feedback = item.feedback;
+                freelancerViewModel.Feedbacks.Add(clientFeedbackViewModel);
+            }
 
             if (gigs != null)
             {

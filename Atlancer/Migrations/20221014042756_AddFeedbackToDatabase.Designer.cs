@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Atlancer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221014023954_AddFeedbackToDatabase")]
+    [Migration("20221014042756_AddFeedbackToDatabase")]
     partial class AddFeedbackToDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

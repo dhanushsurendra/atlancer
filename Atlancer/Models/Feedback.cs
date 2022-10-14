@@ -31,7 +31,7 @@ namespace Atlancer.Models
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Rating is required")]
-        [Range(1, 5)]
-        public float Rating { get; set; } = 1;
+        [Range(0, 4.99)]
+        public float Rating { get; set; } = 0;
     }
 }

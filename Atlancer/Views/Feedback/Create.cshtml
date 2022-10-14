@@ -7,7 +7,7 @@
 <section class="section gigs_section">
 	<div class="container d-flex flex-column align-items-center justify-content-center gigs_container">
 		
-		<form action="" method="POST">
+		<form method="post">
 			<div class="form-outline mb-4">
 				<h3 class="mb-5" style="align-self: flex-start;">
 					Feedback
@@ -20,7 +20,7 @@
 			</div>
 			<div class="form-outline mb-4">
 				<label asp-for="Description" style="font-weight: 600" class="form-label" for="description">Description</label>
-				<textarea asp-for="Title" style="resize: none" type="text" class="form-control form-control-lg" rows="10" cols="50"></textarea>
+				<textarea asp-for="Description" style="resize: none" type="text" class="form-control form-control-lg" rows="10" cols="50"></textarea>
 				<span asp-validation-for="Description" class="text-danger"></span>
 			</div>
 			<div class="form-outline mb-4">
