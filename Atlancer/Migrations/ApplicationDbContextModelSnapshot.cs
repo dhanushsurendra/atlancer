@@ -138,10 +138,6 @@ namespace Atlancer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FreelancerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<float>("Rating")
                         .HasColumnType("real");
 
@@ -152,8 +148,6 @@ namespace Atlancer.Migrations
                     b.HasKey("FeedbackId");
 
                     b.HasIndex("ClientId");
-
-                    b.HasIndex("FreelancerId");
 
                     b.ToTable("Feedback");
                 });
@@ -357,15 +351,7 @@ namespace Atlancer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Atlancer.Models.Freelancer", "Freelancer")
-                        .WithMany()
-                        .HasForeignKey("FreelancerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Client");
-
-                    b.Navigation("Freelancer");
                 });
 
             modelBuilder.Entity("Atlancer.Models.Gigs", b =>

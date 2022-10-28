@@ -1,4 +1,6 @@
-﻿@{
+﻿@model FreelancerPaymentViewModel
+
+@{
     Layout = "";
 }
 
@@ -65,13 +67,6 @@
                 </div>
                 <div class="box">
                     <div class="right-side">
-                        <div class="box-topic">Payout Released</div>
-                        <div class="number">@ViewBag.PayoutReleased</div>
-                    </div>
-                    <i class='bx bx-log-in-circle icon payout'></i>
-                </div>
-                <div class="box">
-                    <div class="right-side">
                         <div class="box-topic">Payout Pending</div>
                         <div class="number">@ViewBag.Pending</div>
                     </div>
@@ -84,9 +79,6 @@
                     </div>
                     <i class='bx bx-user icon users'></i>
                 </div>
-            </div>
-
-            <div class="overview-boxes">
                 <div class="box">
                     <div class="right-side">
                         <div class="box-topic">Revenue</div>
@@ -94,6 +86,10 @@
                     </div>
                     <i class='bx bx-wallet-alt icon'></i>
                 </div>
+            </div>
+
+            <div class="overview-boxes">
+                
                 <div class="box">
                     <div class="right-side">
                         <div class="box-topic">Ongoing Projects</div>
@@ -115,72 +111,49 @@
                     </div>
                     <i class='bx bx-user icon freelancers'></i>
                 </div>
+                <div class="box" style="background-color: transparent; box-shadow: none">
+                    <div class="right-side">
+                       
+                    </div>
+                </div>
             </div>
 
             <div class="sales-boxes">
                 <div class="recent-sales box">
                     <h2 style="font-weight: 600; margin-bottom: 20px" class="title">Recent Transactions</h2>
                     <div class="sales-details">
-                        <ul class="details">
-                            <li class="topic">Date</li>
-                            <li><a href="#">02 Jan 2021</a></li>
-                            <li><a href="#">02 Jan 2021</a></li>
-                            <li><a href="#">02 Jan 2021</a></li>
-                            <li><a href="#">02 Jan 2021</a></li>
-                            <li><a href="#">02 Jan 2021</a></li>
-                            <li><a href="#">02 Jan 2021</a></li>
-                            <li><a href="#">02 Jan 2021</a></li>
-                            <li><a href="#">02 Jan 2021</a></li>
-                            <li><a href="#">02 Jan 2021</a></li>
-                        </ul>
-                        <ul class="details">
-                            <li class="topic">Client</li>
-                            <li><a href="#">Alex Doe</a></li>
-                            <li><a href="#">David Mart</a></li>
-                            <li><a href="#">Roe Parter</a></li>
-                            <li><a href="#">Diana Penty</a></li>
-                            <li><a href="#">Martin Paw</a></li>
-                            <li><a href="#">Doe Alex</a></li>
-                            <li><a href="#">Aiana Lexa</a></li>
-                            <li><a href="#">Rexel Mags</a></li>
-                            <li><a href="#">Tiana Loths</a></li>
-                        </ul>
-                        <ul class="details">
-                            <li class="topic">Freelancer</li>
-                            <li><a href="#">Alex Doe</a></li>
-                            <li><a href="#">David Mart</a></li>
-                            <li><a href="#">Roe Parter</a></li>
-                            <li><a href="#">Diana Penty</a></li>
-                            <li><a href="#">Martin Paw</a></li>
-                            <li><a href="#">Doe Alex</a></li>
-                            <li><a href="#">Aiana Lexa</a></li>
-                            <li><a href="#">Rexel Mags</a></li>
-                            <li><a href="#">Tiana Loths</a></li>
-                        </ul>
-                        <ul class="details">
-                            <li class="topic">Project Status</li>
-                            <li><a href="#">Delivered</a></li>
-                            <li><a href="#">Pending</a></li>
-                            <li><a href="#">Returned</a></li>
-                            <li><a href="#">Delivered</a></li>
-                            <li><a href="#">Pending</a></li>
-                            <li><a href="#">Returned</a></li>
-                            <li><a href="#">Delivered</a></li>
-                            <li><a href="#">Pending</a></li>
-                            <li><a href="#">Delivered</a></li>
-                        </ul>
-                        <ul class="details">
-                            <li class="topic">Amount</li>
-                            <li><a href="#">$204.98</a></li>
-                            <li><a href="#">$24.55</a></li>
-                            <li><a href="#">$25.88</a></li>
-                            <li><a href="#">$170.66</a></li>
-                            <li><a href="#">$56.56</a></li>
-                            <li><a href="#">$44.95</a></li>
-                            <li><a href="#">$67.33</a></li>
-                            <li><a href="#">$23.53</a></li>
-                            <li><a href="#">$46.52</a></li>
-                        </ul>
+                        <table style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th scope="col">
+                                        Payemnt Id
+                                    </th>
+                                    <th scope="col">
+                                        Payment Date
+                                    </th>
+                                    <th scope="col">
+                                        Payment Amount
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody style="width: 100%; text-align: center;">
+                                @foreach (var item in Model.Payment)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.PaymentId
+                                        </td>
+                                        <td>
+                                            @String.Format("{0:m}", item.PaymentDate)
+                                        </td>
+                                        <td>
+                                            @item.BidAmount
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                     </div>
 
 
@@ -191,61 +164,15 @@
                 <div class="top-sales box">
                     <div class="title" style="margin-bottom: 20px">Top Freelancers</div>
                     <ul class="top-sales-details">
-                        <li>
-                            <a href="#">
-                                <img src="images/sunglasses.jpg" alt="">
-                                <span class="product">Vuitton Sunglasses</span>
-                            </a>
-                            <span class="price">$1107</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="images/jeans.jpg" alt="">
-                                <span class="product">Hourglass Jeans </span>
-                            </a>
-                            <span class="price">$1567</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="images/nike.jpg" alt="">
-                                <span class="product">Nike Sport Shoe</span>
-                            </a>
-                            <span class="price">$1234</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="images/scarves.jpg" alt="">
-                                <span class="product">Hermes Silk Scarves.</span>
-                            </a>
-                            <span class="price">$2312</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="images/blueBag.jpg" alt="">
-                                <span class="product">Succi Ladies Bag</span>
-                            </a>
-                            <span class="price">$1456</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="images/bag.jpg" alt="">
-                                <span class="product">Gucci Womens's Bags</span>
-                            </a>
-                            <span class="price">$2345</span>
-                        <li>
-                            <a href="#">
-                                <img src="images/addidas.jpg" alt="">
-                                <span class="product">Addidas Running Shoe</span>
-                            </a>
-                            <span class="price">$2345</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="images/shirt.jpg" alt="">
-                                <span class="product">Bilack Wear's Shirt</span>
-                            </a>
-                            <span class="price">$1245</span>
-                        </li>
+                        @foreach(var item in Model.Freelancers) {
+                            <li>
+                                <a href="#">
+                                    <img src="~/uploads/@item.ProfileImageName" alt="">
+                                    <span class="product">@item.FreelancerName</span>
+                                </a>
+                                <span class="price"></span>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

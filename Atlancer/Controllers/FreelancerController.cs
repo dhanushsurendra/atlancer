@@ -133,6 +133,31 @@ namespace Atlancer.Controllers
                 return NotFound();
             }
 
+            var admin = _db.Admin.Find(1);
+
+            if (admin == null)
+            {
+                return NotFound();
+            }
+
+            var wallet = admin.Wallet;
+            Console.WriteLine(wallet);
+
+            admin.Wallet = admin.Wallet - wallet;
+            _db.Admin.Update(admin);
+            _db.SaveChanges();
+
+            var freelancer = _db.Freelancer.FirstOrDefault();
+
+            if (freelancer == null)
+            {
+                return NotFound();
+            }
+
+            freelancer.Wallet =  freelancer.Wallet + wallet;
+            _db.Freelancer.Update(freelancer);
+            _db.SaveChanges();
+
             var project = _db.Project.Find(id);
 
             if (project == null)
@@ -141,10 +166,34 @@ namespace Atlancer.Controllers
             }
 
             project.ProjectStatus = "Completed";
+
             _db.Project.Update(project);
             _db.SaveChanges();
 
-            ViewBag.Client = Globals.UserId;
+            ViewBag.ClientId = Globals.UserId;
+
+            return View();
+        }
+
+        public IActionResult Disapproved(string? id)
+        {
+            if (id == "" || id == null)
+            {
+                return NotFound();
+            }
+
+            var project = _db.Project.Find(id);
+
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            project.ProjectStatus = "Ongoing";
+            _db.Project.Update(project);
+            _db.SaveChanges();
+
+            ViewBag.ClientId = Globals.UserId;
 
             return View();
         }

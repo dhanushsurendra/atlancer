@@ -1,0 +1,52 @@
+﻿@model Freelancer
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Client | Atlancer</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;1,100&display=swap"
+          rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="~/Atlancer.styles.css" asp-append-version="true" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white">
+        <img width="200px" class="p-4" src="~/images/logo-01-01.png" />
+    </nav>
+    <section class="vh-100">
+        <div class="container py-5 d-flex align-items-center justify-content-between flex-column">
+            <img width="500px" src="~/images/cancel.png" />
+            <h5>Project Disapproved</h5>
+            <a class="btn btn-primary mt-3" asp-controller="Client" asp-action="Index" asp-route-id=@ViewBag.ClientId>Go back to Profile</a>
+        </div>
+    </section
+</body>
+<script>    
+   
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

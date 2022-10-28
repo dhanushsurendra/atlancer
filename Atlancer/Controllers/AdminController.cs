@@ -32,7 +32,14 @@ namespace Atlancer.Controllers
             ViewBag.Completed = _db.Project.Where(p => p.ProjectStatus == "Completed").Count();
             ViewBag.Bidding = _db.Project.Where(p => p.ProjectStatus == "Bidding").Count();
 
-            return View();
+            IEnumerable<Freelancer> freelancers = _db.Freelancer.ToList();
+            IEnumerable<Payment> Payment = _db.Payment.ToList();
+
+            FreelancerPaymentViewModel freelancerPaymentViewModel = new FreelancerPaymentViewModel();
+            freelancerPaymentViewModel.Freelancers = freelancers;
+            freelancerPaymentViewModel.Payment = Payment;
+
+            return View(freelancerPaymentViewModel);
         }
 
         public IActionResult Login()

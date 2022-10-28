@@ -10,5 +10,6 @@ namespace Atlancer.Models
         public Client Client { get; set; }
 
         public List<Project> Project { get; set; }
+        public int ReviewsCount { get; set; }
     }
 }

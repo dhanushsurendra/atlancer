@@ -39,8 +39,6 @@ namespace Atlancer.Controllers
             ModelState.Remove("FeedbackId");
             ModelState.Remove("ClientId");
             ModelState.Remove("Client");
-            ModelState.Remove("FreelancerId");
-            ModelState.Remove("Freelancer");
 
             ViewBag.UserType = Globals.UserType;
 
@@ -52,16 +50,10 @@ namespace Atlancer.Controllers
 
             feedback.FeedbackId = id;
             feedback.ClientId = Globals.UserId;
-            feedback.FreelancerId = "76904812b4";
 
             if (client != null)
             {
                 feedback.Client = client;
-            }
-
-            if (freelancer != null)
-            {
-                feedback.Freelancer = freelancer;
             }
 
             if (ModelState.IsValid)

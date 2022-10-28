@@ -25,14 +25,17 @@ namespace Atlancer.Controllers
             ClientViewModel clientViewModel = new ClientViewModel();
             ModelState.Remove("Client");
             ModelState.Remove("Project");
+            ModelState.Remove("ReviewsCount");
 
             if (id == "" || id == null)
             {
                 return NotFound();
             }
 
+            var reviewsCount = _db.Feedback.ToList().Count();
+            clientViewModel.ReviewsCount = reviewsCount;
+
             var client = _db.Client.Find(id);
-            var project = _db.Project.Find(id);
 
             if (client != null)
             {
